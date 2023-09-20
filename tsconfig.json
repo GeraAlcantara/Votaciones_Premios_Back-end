@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "es2017",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "sourceMap": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "types": ["node"],
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@app/configs": ["./src/configs"],
+      "@app/configs/*": ["./src/configs/*"],
+      "@app/modules": ["./src/modules"],
+      "@app/modules/*": ["./src/modules/*"],
+      "@app/shared": ["./src/shared"],
+      "@app/shared/*": ["./src/shared/*"]
+    },
+    "noImplicitReturns": true,
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}
