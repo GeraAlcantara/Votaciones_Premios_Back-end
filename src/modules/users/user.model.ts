@@ -12,7 +12,7 @@ export interface UserDocument extends User, Document {}
 
 type UserModel = Model<UserDocument>;
 
-const UserSchema: Schema<UserDocument> = new Schema(
+const UserSchema: Schema = new Schema(
   {
     accountId: String,
     provider: String,
