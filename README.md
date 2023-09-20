@@ -32,17 +32,3 @@ Instalar dependencias:
 ```bash
 $ npm i
 ```
-
-Para generar tokens secret `ACCESS_TOKEN_SECRET` y `REFRESH_TOKEN_SECRET` puedes usar:
-```bash
-$ openssl rand -base64 32
-```
-
-### Tasks:
-
-- [ ] Endpoint para refresh tokens
-- [ ] Endpoint para OAuth
-- [ ] Revocación de tokens con redis usando [upstash](https://upstash.com/)
-- [ ] Definir lo futuros modulos
-- [ ] Crear middleware para proteger rutas
-- [ ] Agregar unit tests y tests de integración
