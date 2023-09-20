@@ -6,6 +6,7 @@ const options: ConnectOptions = {
   autoIndex: true,
   serverSelectionTimeoutMS: 5000,
   socketTimeoutMS: 45000,
+  dbName: 'app',
 };
 
 export const connection = async () => {
