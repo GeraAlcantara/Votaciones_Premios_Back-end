@@ -1,0 +1,7 @@
+.idea
+.swc
+.local
+.vscode
+node_modules
+__tests__
+package-lock.json
