@@ -16,3 +16,7 @@ Siempre tomar un issue y crear la branch con el numero de issue para que sea mas
  - Base de datos: MongoDB (huyd credenciales)
  - ORM: Mongoose
  - Autenticación Github App: (huyd credenciales)
+
+### Team Lead de Back-end
+Ch14k1
+
