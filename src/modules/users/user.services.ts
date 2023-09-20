@@ -1,37 +1,24 @@
-import createHttpError from 'http-errors';
-import { UserDocument, UserModel } from '@app/modules/users/user.model';
+import { User, UserDocument, UserModel } from '@app/modules/users/user.model';
 
-export const createUser = <T>(data: T): Promise<UserDocument> => {
-  return UserModel.create(data);
+export const createOrUpdateUser = async (
+  accountId: string,
+  provider: string,
+  data: User,
+) => {
+  return UserModel.findOneAndUpdate({ accountId, provider }, data, {
+    upsert: true,
+    new: true,
+  });
 };
 
-export const findUserByEmailOrThrow = async (
-  email: string,
-  message = 'User does not exist',
-): Promise<UserDocument> => {
-  const user = await UserModel.findOne({ email });
+export const mapUser = (user: UserDocument): User => {
+  const { username, displayName, emails, provider, accountId } = user;
 
-  if (!user) {
-    throw createHttpError.BadRequest(message);
-  }
-
-  return user;
-};
-
-export const validateIfUserExists = async (email: string) => {
-  const userExists = await UserModel.findOne({ email });
-  if (userExists) {
-    throw createHttpError.BadRequest('User already exists');
-  }
-};
-
-export const mapUser = (user: UserDocument) => {
-  const { _id, name, email, picture, status } = user;
   return {
-    id: _id,
-    name,
-    email,
-    picture,
-    status,
+    accountId,
+    username,
+    displayName,
+    emails,
+    provider,
   };
 };
