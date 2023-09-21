@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import compresion from 'compression';
 import cors from 'cors';
 import session from 'express-session';
-import session from 'express-session';
 import createHttpError from 'http-errors';
 import MongoStore from 'connect-mongo';
 import { config } from '@app/configs/app.config';
