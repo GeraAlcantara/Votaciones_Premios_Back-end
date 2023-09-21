@@ -1,15 +1,16 @@
 import passport from 'passport';
-import { Strategy as GitHubStrategy, Profile } from 'passport-github2';
+import { Strategy as DiscordStrategy, Profile } from 'passport-discord';
 import { config } from '@app/configs/app.config';
 import { User } from '@app/modules/users/user.model';
 import { createOrUpdateUser } from '@app/modules/users/user.services';
 
 passport.use(
-  new GitHubStrategy(
+  new DiscordStrategy(
     {
-      clientID: config.githubClientId,
-      clientSecret: config.githubClientSecret,
-      callbackURL: `${config.baseUrl}/auth/github/callback`,
+      scope: ['identify', 'email'],
+      clientID: config.discordClientId,
+      clientSecret: config.discordClientSecret,
+      callbackURL: `${config.baseUrl}/auth/discord/callback`,
     },
     async (
       _accessToken: string,

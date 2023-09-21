@@ -5,12 +5,15 @@ import cookieParser from 'cookie-parser';
 import compresion from 'compression';
 import cors from 'cors';
 import session from 'express-session';
+import session from 'express-session';
 import createHttpError from 'http-errors';
-
+import MongoStore from 'connect-mongo';
 import { config } from '@app/configs/app.config';
 import passport from '@app/configs/passport.config';
 import { AuthRouter } from '@app/modules/auth/auth.route';
 import { UserRouter } from '@app/modules/users/user.route';
+import mongoose from 'mongoose';
+import type { User } from './modules/users/user.model';
 
 export const app = express();
 
@@ -23,6 +26,10 @@ app.use(cors());
 app.use(
   session({
     secret: config.sessionSecret,
+    store: MongoStore.create({
+      mongoUrl: config.databaseUrl,
+      collectionName: 'sessions',
+    }),
     resave: true,
     saveUninitialized: true,
     cookie: {
@@ -35,12 +42,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', (req: Request, res: Response) => {
-  console.log(req.user);
+  let { username } = req.user as User;
   res.json({
-    message: 'Welcome to API',
+    message: `¡Hey, ${username}! Bienvenido a el Discord Awards,`,
   });
 });
 
+app.use(AuthRouter);
+app.use(UserRouter);
 app.use(AuthRouter);
 app.use(UserRouter);
 
