@@ -21,6 +21,26 @@ El proyecto se realizará con las siguientes tecnologías:
 ### Team Lead de Back-end
 Ch14k1
 
+## Deploy en local
+Duplicar y renombrar el archivo `.env.example` a `.env`
+
+Instalar dependencias:
+```bash
+$ npm i
+```
+
+Para crear una `SessionSecret` segura:
+```bash
+$ openssl rand -base64 32
+```
+
+Comandos disponibles:
+```bash
+$ npm run start # para desarrollo
+$ npm run dev # para desarrollo con watch mode
+$ npm run build # para producción
+```
+
 ### Requerimentos
 
 #### Objetivo

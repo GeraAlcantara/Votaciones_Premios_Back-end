@@ -11,8 +11,6 @@ import { config } from '@app/configs/app.config';
 import passport from '@app/configs/passport.config';
 import { AuthRouter } from '@app/modules/auth/auth.route';
 import { UserRouter } from '@app/modules/users/user.route';
-import mongoose from 'mongoose';
-import type { User } from './modules/users/user.model';
 
 export const app = express();
 
@@ -28,6 +26,7 @@ app.use(
     store: MongoStore.create({
       mongoUrl: config.databaseUrl,
       collectionName: 'sessions',
+      dbName: 'app',
     }),
     resave: true,
     saveUninitialized: true,
@@ -41,14 +40,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', (req: Request, res: Response) => {
-  let { username } = req.user as User;
   res.json({
-    message: `¡Hey, ${username}! Bienvenido a el Discord Awards,`,
+    message: '¡Bienvenido a el Discord Awards',
   });
 });
 
-app.use(AuthRouter);
-app.use(UserRouter);
 app.use(AuthRouter);
 app.use(UserRouter);
 

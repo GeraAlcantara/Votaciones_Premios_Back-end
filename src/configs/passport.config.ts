@@ -1,7 +1,8 @@
 import passport from 'passport';
 import { Strategy as DiscordStrategy, Profile } from 'passport-discord';
+import createHttpError from 'http-errors';
 import { config } from '@app/configs/app.config';
-import { User } from '@app/modules/users/user.model';
+import { User, UserWithAccount } from '@app/modules/users/models/user.model';
 import { createOrUpdateUser } from '@app/modules/users/user.services';
 
 passport.use(
@@ -15,22 +16,37 @@ passport.use(
     async (
       _accessToken: string,
       _refreshToken: string,
-      profile: Profile,
-      done: (error?: null, user?: User) => void,
+      profile: Profile | any,
+      done: (error?: Error | null, user?: UserWithAccount) => void,
     ) => {
-      const payload = {
-        accountId: profile.id,
+      if (!profile.email) {
+        return done(createHttpError.BadRequest('Email required'));
+      }
+
+      const userPayload = {
+        displayName: profile.global_name,
+        email: profile.email,
+        avatar: profile?.avatar || null,
+      };
+
+      const accountPayload = {
         provider: profile.provider,
-        displayName: profile.displayName,
+        providerAccountId: profile.id,
         username: profile.username,
-        emails: profile.emails?.map((item) => item.value) || [],
       };
 
       const user = await createOrUpdateUser(
-        profile.id,
+        profile.email,
         profile.provider,
-        payload,
+        userPayload,
+        accountPayload,
       );
+
+      if (!user) {
+        return done(
+          createHttpError.InternalServerError('Server internal error'),
+        );
+      }
 
       return done(null, user);
     },
