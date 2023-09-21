@@ -1,7 +1,8 @@
-import mongoose, { Document, Schema, Model } from 'mongoose';
+import mongoose, { Document, Schema, Model, Types } from 'mongoose';
 
 export type Category = {
   name: string;
+  winnerId: string;
 };
 
 export interface CategoryDocument extends Category, Document {}
@@ -12,6 +13,11 @@ const CategorySchema: Schema = new Schema(
   {
     name: {
       type: String,
+      required: true,
+    },
+    winnerId: {
+      type: Types.ObjectId,
+      default: null,
     },
   },
   {
