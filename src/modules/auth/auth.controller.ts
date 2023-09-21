@@ -1,12 +1,12 @@
-import type { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import passport from '@app/configs/passport.config';
 
 export const login = {
-  github: {
-    access: passport.authenticate('github', {
-      scope: ['user:email'],
+  discord: {
+    access: passport.authenticate('discord', {
+      scope: ['identify', 'guilds'],
     }),
-    callback: passport.authenticate('github', {
+    callback: passport.authenticate('discord', {
       failureRedirect: '/auth/failed',
     }),
     redirect: (req: Request, res: Response) => {
@@ -15,10 +15,14 @@ export const login = {
   },
 };
 
-export const logout = (req: Request, res: Response) => {
+export const logout = (req: Request, res: Response, next: NextFunction) => {
   if (req.isAuthenticated()) {
-    req.logout({}, () => null);
+    const options = {};
+    req.logout(options, (err) => {
+      if (err) {
+        next(err);
+      }
+    });
   }
-
-  res.json({});
+  res.json();
 };

@@ -9,6 +9,6 @@ export const config = {
   clientUrl: process.env.CLIENT_URL || '',
   databaseUrl: process.env.DATABASE_URL || '',
   sessionSecret: process.env.SESSION_SECRET || '',
-  githubClientId: process.env.GITHUB_CLIENT_ID || '',
-  githubClientSecret: process.env.GITHUB_CLIENT_SECRET || '',
+  discordClientId: process.env.DISCORD_CLIENT_ID || '',
+  discordClientSecret: process.env.DISCORD_CLIENT_SECRET || '',
 };
