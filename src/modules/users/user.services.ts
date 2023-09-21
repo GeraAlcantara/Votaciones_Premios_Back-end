@@ -1,24 +1,35 @@
-import { User, UserDocument, UserModel } from '@app/modules/users/user.model';
+import {
+  User,
+  UserModel,
+  UserWithAccount,
+} from '@app/modules/users/models/user.model';
+import { Account, AccountModel } from '@app/modules/users/models/account.model';
+
+type Provider = 'discord' | 'github';
 
 export const createOrUpdateUser = async (
-  accountId: string,
-  provider: string,
-  data: User,
-) => {
-  return UserModel.findOneAndUpdate({ accountId, provider }, data, {
+  email: string,
+  provider: Provider,
+  userPayload: User,
+  accountPayload: Omit<Account, 'user'>,
+): Promise<UserWithAccount | null> => {
+  const user = await UserModel.findOneAndUpdate({ email }, userPayload, {
     upsert: true,
     new: true,
   });
-};
 
-export const mapUser = (user: UserDocument): User => {
-  const { username, displayName, emails, provider, accountId } = user;
+  await AccountModel.updateOne(
+    { _id: user._id, provider },
+    { user: user._id, ...accountPayload },
+    {
+      upsert: true,
+    },
+  );
 
-  return {
-    accountId,
-    username,
-    displayName,
-    emails,
-    provider,
-  };
+  return AccountModel.findOne({ userId: user._id })
+    .select(['provider', 'providerAccountId', 'username'])
+    .populate({
+      path: 'user',
+      select: ['email', 'avatar', 'displayName'],
+    });
 };
