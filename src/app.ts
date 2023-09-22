@@ -48,7 +48,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use(AuthRouter);
 app.use(UserRouter);
-app.use(ContributorRouter);
+app.use('/contributors', ContributorRouter);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   next(createHttpError.NotFound('Router not found'));
