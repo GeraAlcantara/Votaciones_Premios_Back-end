@@ -15,7 +15,9 @@
     "prepare": "husky install"
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "keywords": [],
   "author": "Michael Cardoza <mc.michaelcardoza@gmail.com>",
@@ -53,7 +55,7 @@
     "@types/node": "^20.4.5",
     "@types/passport": "^1.0.12",
     "@types/passport-discord": "^0.1.7",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
