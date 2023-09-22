@@ -46,8 +46,8 @@ app.get('/', (req: Request, res: Response) => {
   });
 });
 
-app.use(AuthRouter);
-app.use(UserRouter);
+app.use('/auth', AuthRouter);
+app.use('/users', UserRouter);
 app.use('/contributors', ContributorRouter);
 
 app.use((req: Request, res: Response, next: NextFunction) => {

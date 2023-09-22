@@ -4,4 +4,4 @@ import { getCurrentUser } from '@app/modules/users/user.controller';
 
 export const UserRouter = express.Router();
 
-UserRouter.route('/users/me').get(isAuthenticated, getCurrentUser);
+UserRouter.route('/me').get(isAuthenticated, getCurrentUser);
