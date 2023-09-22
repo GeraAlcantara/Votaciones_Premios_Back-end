@@ -1,37 +1,41 @@
-import createHttpError from 'http-errors';
-import { UserDocument, UserModel } from '@app/modules/users/user.model';
+import {
+  User,
+  UserModel,
+  UserWithAccount,
+} from '@app/modules/users/models/user.model';
+import { Account, AccountModel } from '@app/modules/users/models/account.model';
 
-export const createUser = <T>(data: T): Promise<UserDocument> => {
-  return UserModel.create(data);
+type Provider = 'discord' | 'github';
+
+export const getUserProfileByUsername = async (
+  displayName: string,
+): Promise<User | null> => {
+  return UserModel.findOne({ displayName: displayName });
 };
 
-export const findUserByEmailOrThrow = async (
+export const createOrUpdateUser = async (
   email: string,
-  message = 'User does not exist',
-): Promise<UserDocument> => {
-  const user = await UserModel.findOne({ email });
+  provider: Provider,
+  userPayload: User,
+  accountPayload: Omit<Account, 'user'>,
+): Promise<UserWithAccount | null> => {
+  const user = await UserModel.findOneAndUpdate({ email }, userPayload, {
+    upsert: true,
+    new: true,
+  });
 
-  if (!user) {
-    throw createHttpError.BadRequest(message);
-  }
+  await AccountModel.updateOne(
+    { _id: user._id, provider },
+    { user: user._id, ...accountPayload },
+    {
+      upsert: true,
+    },
+  );
 
-  return user;
-};
-
-export const validateIfUserExists = async (email: string) => {
-  const userExists = await UserModel.findOne({ email });
-  if (userExists) {
-    throw createHttpError.BadRequest('User already exists');
-  }
-};
-
-export const mapUser = (user: UserDocument) => {
-  const { _id, name, email, picture, status } = user;
-  return {
-    id: _id,
-    name,
-    email,
-    picture,
-    status,
-  };
+  return AccountModel.findOne({ user: user._id })
+    .select(['provider', 'providerAccountId', 'username'])
+    .populate({
+      path: 'user',
+      select: ['email', 'avatar', 'displayName'],
+    });
 };
