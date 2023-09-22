@@ -1,9 +1,14 @@
 import type { Request, Response } from 'express';
-import { mapUser } from '@app/modules/users/user.services';
-import { UserDocument } from '@app/modules/users/user.model';
+import { UserWithAccount } from '@app/modules/users/models/user.model';
 
 export const getCurrentUser = (req: Request, res: Response) => {
-  const user = <UserDocument>req.user;
+  const account = req.user as UserWithAccount;
 
-  res.json(mapUser(user));
+  res.json({
+    id: account._id,
+    username: account.username,
+    displayName: account.user.displayName,
+    email: account.user.email,
+    avatar: account.user.avatar,
+  });
 };

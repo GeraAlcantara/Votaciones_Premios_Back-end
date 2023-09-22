@@ -6,11 +6,12 @@ import compresion from 'compression';
 import cors from 'cors';
 import session from 'express-session';
 import createHttpError from 'http-errors';
-
+import MongoStore from 'connect-mongo';
 import { config } from '@app/configs/app.config';
 import passport from '@app/configs/passport.config';
 import { AuthRouter } from '@app/modules/auth/auth.route';
 import { UserRouter } from '@app/modules/users/user.route';
+import { ContributorRouter } from '@app/modules/contributors/contributor.route';
 
 export const app = express();
 
@@ -23,6 +24,11 @@ app.use(cors({origin: "http://localhost:3000", credentials: true}));
 app.use(
   session({
     secret: config.sessionSecret,
+    store: MongoStore.create({
+      mongoUrl: config.databaseUrl,
+      collectionName: 'sessions',
+      dbName: 'app',
+    }),
     resave: true,
     saveUninitialized: true,
     cookie: {
@@ -35,20 +41,20 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', (req: Request, res: Response) => {
-  console.log(req.user);
   res.json({
-    message: 'Welcome to API',
+    message: '¡Bienvenido a el Discord Awards',
   });
 });
 
-app.use(AuthRouter);
-app.use(UserRouter);
+app.use('/auth', AuthRouter);
+app.use('/users', UserRouter);
+app.use('/contributors', ContributorRouter);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   next(createHttpError.NotFound('Router not found'));
 });
 
-app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+app.use((error: any, req: Request, res: Response, _next: NextFunction) => {
   res.status(error.status || 500);
   res.send({
     statusCode: error.status || 500,

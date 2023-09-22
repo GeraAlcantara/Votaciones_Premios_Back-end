@@ -3,12 +3,12 @@ import { login, logout } from '@app/modules/auth/auth.controller';
 
 export const AuthRouter = express.Router();
 
-AuthRouter.route('/auth/github').get(login.github.access);
-AuthRouter.route('/auth/github/callback').get(
-  login.github.callback,
-  login.github.redirect,
+AuthRouter.route('/discord').get(login.discord.access);
+AuthRouter.route('/discord/callback').get(
+  login.discord.callback,
+  login.discord.redirect,
 );
-AuthRouter.route('/auth/failed').get(() => {
+AuthRouter.route('/failed').get(() => {
   return {};
 });
-AuthRouter.route('/auth/logout').get(logout);
+AuthRouter.route('/logout').get(logout);
