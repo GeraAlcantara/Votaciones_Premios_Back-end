@@ -54,7 +54,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next(createHttpError.NotFound('Router not found'));
 });
 
-app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+app.use((error: any, req: Request, res: Response, _next: NextFunction) => {
   res.status(error.status || 500);
   res.send({
     statusCode: error.status || 500,
