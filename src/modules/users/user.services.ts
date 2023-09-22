@@ -7,6 +7,12 @@ import { Account, AccountModel } from '@app/modules/users/models/account.model';
 
 type Provider = 'discord' | 'github';
 
+export const getUserProfileByUsername = async (
+  displayName: string,
+): Promise<User | null> => {
+  return UserModel.findOne({ displayName: displayName });
+};
+
 export const createOrUpdateUser = async (
   email: string,
   provider: Provider,
