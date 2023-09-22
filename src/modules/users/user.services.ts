@@ -26,7 +26,7 @@ export const createOrUpdateUser = async (
     },
   );
 
-  return AccountModel.findOne({ userId: user._id })
+  return AccountModel.findOne({ user: user._id })
     .select(['provider', 'providerAccountId', 'username'])
     .populate({
       path: 'user',

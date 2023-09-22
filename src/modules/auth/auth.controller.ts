@@ -4,7 +4,7 @@ import passport from '@app/configs/passport.config';
 export const login = {
   discord: {
     access: passport.authenticate('discord', {
-      scope: ['identify', 'guilds'],
+      scope: ['identify', 'guilds', 'email'],
     }),
     callback: passport.authenticate('discord', {
       failureRedirect: '/auth/failed',

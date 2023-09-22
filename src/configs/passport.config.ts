@@ -19,6 +19,7 @@ passport.use(
       profile: Profile | any,
       done: (error?: Error | null, user?: UserWithAccount) => void,
     ) => {
+      console.log(profile);
       if (!profile.email) {
         return done(createHttpError.BadRequest('Email required'));
       }
