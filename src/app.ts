@@ -11,6 +11,7 @@ import { config } from '@app/configs/app.config';
 import passport from '@app/configs/passport.config';
 import { AuthRouter } from '@app/modules/auth/auth.route';
 import { UserRouter } from '@app/modules/users/user.route';
+import { CategoryRouter } from '@app/modules/categories/category.route';
 import { ContributorRouter } from '@app/modules/contributors/contributor.route';
 
 export const app = express();
@@ -49,6 +50,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/auth', AuthRouter);
 app.use('/users', UserRouter);
 app.use('/contributors', ContributorRouter);
+app.use('/categories', CategoryRouter);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   next(createHttpError.NotFound('Router not found'));
