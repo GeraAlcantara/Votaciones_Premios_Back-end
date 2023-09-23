@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compresion());
-app.use(cors());
+app.use(cors({ origin: config.clientUrl, credentials: true }));
 app.use(
   session({
     secret: config.sessionSecret,
