@@ -18,6 +18,7 @@ const CategorySchema: Schema = new Schema(
     winnerId: {
       type: Types.ObjectId,
       default: null,
+      ref: 'User',
     },
   },
   {
