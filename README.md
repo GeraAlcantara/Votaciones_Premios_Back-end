@@ -24,6 +24,10 @@ Ch14k1
 ## Deploy en local
 Duplicar y renombrar el archivo `.env.example` a `.env`
 
+Donde generar las credenciales para OAuth:
+- [GitGub](https://github.com/settings/developers)
+- [Discord](https://discord.com/developers/applications)
+
 Instalar dependencias:
 ```bash
 $ npm i
