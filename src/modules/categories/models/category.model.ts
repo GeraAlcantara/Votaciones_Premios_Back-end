@@ -1,13 +1,5 @@
-import mongoose, { Document, Schema, Model, Types } from 'mongoose';
-
-export type Category = {
-  name: string;
-  winnerId: string;
-};
-
-export interface CategoryDocument extends Category, Document {}
-
-type CategoryModel = Model<CategoryDocument>;
+import mongoose, { Schema, Model, Types } from 'mongoose';
+import { CategoryDocument } from '@app/modules/categories/category.type';
 
 const CategorySchema: Schema = new Schema(
   {
@@ -15,7 +7,15 @@ const CategorySchema: Schema = new Schema(
       type: String,
       required: true,
     },
-    winnerId: {
+    slug: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    winner: {
       type: Types.ObjectId,
       default: null,
       ref: 'User',
@@ -27,7 +27,7 @@ const CategorySchema: Schema = new Schema(
   },
 );
 
-export const CategoryModel = mongoose.model<CategoryDocument, CategoryModel>(
-  'Category',
-  CategorySchema,
-);
+export const CategoryModel = mongoose.model<
+  CategoryDocument,
+  Model<CategoryDocument>
+>('Category', CategorySchema);

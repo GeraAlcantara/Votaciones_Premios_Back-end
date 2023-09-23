@@ -2,27 +2,29 @@ import type { NextFunction, Request, Response } from 'express';
 import createHttpError from 'http-errors';
 import {
   getAllCategories,
-  getCategoryById,
+  getCategoryBySlug,
+  mapCategory,
 } from '@app/modules/categories/category.services';
-import { Types } from 'mongoose';
 
 export const getAll = async (req: Request, res: Response) => {
   const categories = await getAllCategories();
-  return res.json(categories);
+  const data = categories.map((category) => mapCategory(category));
+
+  return res.json(data);
 };
 
-export const getById = async (
+export const getBySlug = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const { id } = req.params;
-  if (!Types.ObjectId.isValid(id)) {
-    return next(createHttpError.BadRequest('Invalid category id'));
-  }
-  const category = await getCategoryById(id);
+  const { slug } = req.params;
+
+  const category = await getCategoryBySlug(slug);
+
   if (!category) {
     return next(createHttpError.NotFound('Category not found'));
   }
-  return res.json(category);
+
+  return res.json(mapCategory(category));
 };
