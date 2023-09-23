@@ -13,6 +13,8 @@ import { AuthRouter } from '@app/modules/auth/auth.route';
 import { UserRouter } from '@app/modules/users/user.route';
 import { CategoryRouter } from '@app/modules/categories/category.route';
 import { ContributorRouter } from '@app/modules/contributors/contributor.route';
+import swaggerUi from 'swagger-ui-express';
+import swaggerConfig from '@app/modules/swagger/swagger-config';
 
 export const app = express();
 
@@ -38,12 +40,13 @@ app.use(
   }),
 );
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', (req: Request, res: Response) => {
   res.json({
-    message: '¡Bienvenido a el Discord Awards',
+    message: '¡Bienvenido a el Discord Awards!',
   });
 });
 
