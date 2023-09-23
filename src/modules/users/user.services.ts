@@ -1,35 +1,29 @@
-import {
-  User,
-  UserModel,
-  UserWithAccount,
-} from '@app/modules/users/models/user.model';
-import { Account, AccountModel } from '@app/modules/users/models/account.model';
+import { Account, User } from '@app/modules/users/user.types';
+import { UserModel } from '@app/modules/users/models/user.model';
+import { AccountModel } from '@app/modules/users/models/account.model';
 
 type Provider = 'discord' | 'github';
 
 export const createOrUpdateUser = async (
   email: string,
   provider: Provider,
-  userPayload: User,
+  userPayload: Omit<User, 'role'>,
   accountPayload: Omit<Account, 'user'>,
-): Promise<UserWithAccount | null> => {
-  const user = await UserModel.findOneAndUpdate({ email }, userPayload, {
-    upsert: true,
-    new: true,
-  });
+): Promise<User> => {
+  let user = await UserModel.findOne({ email });
 
-  await AccountModel.updateOne(
-    { _id: user._id, provider },
-    { user: user._id, ...accountPayload },
-    {
-      upsert: true,
-    },
-  );
+  if (user) {
+    await AccountModel.updateOne(
+      { user: user._id, provider },
+      { user: user._id, ...accountPayload },
+      {
+        upsert: true,
+      },
+    );
+  } else {
+    user = await UserModel.create(userPayload);
+    await AccountModel.create({ user: user._id, ...accountPayload });
+  }
 
-  return AccountModel.findOne({ user: user._id })
-    .select(['provider', 'providerAccountId', 'username'])
-    .populate({
-      path: 'user',
-      select: ['email', 'avatar', 'displayName'],
-    });
+  return user;
 };

@@ -1,31 +1,37 @@
-import mongoose, { Document, Schema, Model } from 'mongoose';
-import { Account } from '@app/modules/users/models/account.model';
+import mongoose, { Model, Schema } from 'mongoose';
+import { UserDocument } from '@app/modules/users/user.types';
 
-export type User = {
-  displayName: string;
-  email: string;
-  avatar: string | null;
-};
+export enum UserRole {
+  CANDIDATE = 'candidate',
+  VOTER = 'voter',
+}
 
-export type UserWithAccount = {
-  _id: string;
-  user: {
-    _id: string;
-  } & User;
-} & Omit<Account, 'user'>;
-
-export interface UserDocument extends User, Document {}
-
-type UserModel = Model<UserDocument>;
+const ProfileSchema: Schema = new Schema(
+  {
+    displayName: String,
+    avatar: String,
+    bio: { type: String, default: null },
+    website: { type: String, default: null },
+  },
+  { _id: false },
+);
 
 const UserSchema: Schema = new Schema(
   {
-    displayName: String,
     email: {
       type: String,
       unique: true,
     },
-    avatar: String,
+    username: {
+      type: String,
+      unique: true,
+    },
+    role: {
+      type: String,
+      enum: UserRole,
+      default: UserRole.VOTER,
+    },
+    profile: ProfileSchema,
   },
   {
     collection: 'users',
@@ -33,7 +39,7 @@ const UserSchema: Schema = new Schema(
   },
 );
 
-export const UserModel = mongoose.model<UserDocument, UserModel>(
+export const UserModel = mongoose.model<UserDocument, Model<UserDocument>>(
   'User',
   UserSchema,
 );

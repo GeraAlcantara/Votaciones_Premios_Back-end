@@ -1,0 +1,62 @@
+[
+  {
+    "name": "El Maestro ZEN",
+    "description": "Para el miembro más paciente, capaz de mantener la calma frente a errores, incompatibilidades y debates infinitos.\nSu paciencia podría rivalizar con la de un monje tibetano."
+  },
+  {
+    "name": "El Calentón",
+    "description": "Otorgado al miembro que tiende a calentarse y perder la calma más rápido que un procesador de alta velocidad.\nEste premio reconoce ese toque ardiente y emocional que aporta chispas a las discusiones. ¡Que siempre haya un extinguidor de memes a mano!"
+  },
+  {
+    "name": "El Ninja del soporte",
+    "description": "Con la habilidad de resolver problemas técnicos más rápido que un ninja en la oscuridad de la noche, este miembro es el \"samurái del código\" siempre listo para la acción.\nSus respuestas son más rápidas que un shuriken y más afiladas que una katana.\n¡Cuidado, sus habilidades son tan agudas que podrían herir la autoestima de cualquiera!"
+  },
+  {
+    "name": "El Deepfake dev",
+    "description": "Este miembro tiene el talento mágico de parecer un genio de la programación, pero en realidad, sus habilidades son más falsas que un unicornio pixelado.\nSu capacidad para engañar a todos es tan grande que podrían hacer creer a un ordenador que son un desarrollador de élite.\n¡Cuidado con sus \"soluciones\" de código dignas de un cuento de hadas tecnológico!"
+  },
+  {
+    "name": "El Evangelista Rust",
+    "description": "Este miembro es tan apasionado por el lenguaje de programación Rust que podría convencerte de que incluso las tostadoras deberían ejecutar Rust en lugar de tostar el pan.\nSu entusiasmo por Rust es tan contagioso que hasta las serpientes de bits se convierten en feroces defensores de este lenguaje.\n¡Prepárate para recibir su sermón sobre la seguridad y el rendimiento en cada oportunidad!"
+  },
+  {
+    "name": "El Copypaste",
+    "description": "Este miembro tiene un don para copiar y pegar código de todas partes, pero su habilidad para hacerlo funcionar es más mágica que técnica.\n\nSus \"obras maestras\" a menudo parecen más un truco de magia que una solución real. ¡Prepárate para reír cuando compartan sus creaciones en el chat!"
+  },
+  {
+    "name": "El DevOps Discordia",
+    "description": "Otorgado a aquellos valientes miembros que mantienen la paz y el orden en el salvaje oeste de nuestro servidor de Discord.\nSon los sheriffs digitales que evitan que los trolls invadan la ciudad y aseguran que solo se compartan memes de alta calidad y gifs apropiados. ¡Siempre listos para repartir justicia digital!"
+  },
+  {
+    "name": "El Escapista",
+    "description": "Con la habilidad de desaparecer en un abrir y cerrar de ojos, este miembro se convierte en un verdadero Houdini cuando el ruido y la charla alcanzan niveles insoportables.\nSiempre encuentra refugio en otro canal de voz, dejando atrás el caos y encontrando la paz. ¡Un verdadero artista de la evasión sonora!"
+  },
+  {
+    "name": "El Ojeras",
+    "description": "Para aquellos intrépidos miembros que resisten el sueño y mantienen el voice activo hasta altas horas de la madrugada.\nSon como búhos que despiertan cuando el mundo duerme, siempre listos para compartir historias y conversaciones en las sombras de la noche. ¡La noche es su momento y el voice su territorio!"
+  },
+  {
+    "name": "La futura estrella",
+    "description": "Otorgado a la promesa que, a pesar de su corta edad, ya están demostrando un talento excepcional en el mundo de la programación.\nEsta mente joven está destinada a brillar como estrellas en el firmamento del desarrollo de software. ¡El futuro es suyo para conquistar!"
+  },
+  {
+    "name": "El Capo",
+    "description": "Para aquellos que son los verdaderos jefes en la comunidad de desarrolladores, destacando por su liderazgo, experiencia y habilidades excepcionales en la programación.\nSon los \"cracks\" del código, liderando con maestría y sabiduría, asegurando que la comunidad siga siendo un lugar excepcional para aprender y colaborar. ¡Un saludo al Capo di Código!"
+  },
+  {
+    "name": "El Sobreviviente",
+    "description": "Para aquellos sobrevivientes de ser funados, miembros que son expertos en tomar una broma en buen espíritu y seguir la diversión, incluso cuando son el blanco de las risas.\nSon el alma de la fiesta y hacen que todos se sientan cómodos compartiendo risas y momentos divertidos en la comunidad. ¡Nada los detiene para unirse a la diversión y mantener un ambiente amigable!"
+  },
+  {
+    "name": "Le llamamos Libertad",
+    "description": "Y se marchó y a su barco le llamó Libertad.\nReconociendo a aquellos miembros que, a pesar de no elegir partir por sí mismos, fueron silenciados por la comunidad y, de alguna manera, encontraron su propia \"libertad\" en otro lugar.\n¡Fueron enviados a explorando nuevos mares!"
+  },
+  {
+    "name": "El volcán",
+    "description": "Para aquellos miembros cuyas emociones a veces pueden ser tan explosivas como un volcán en erupción.\nEsta categoría reconoce su capacidad para vivir con pasión y entusiasmo, aunque a veces eso implique una expresión ardiente de sus emociones.\n¡Nunca un berrinche fue tan entretenido!"
+  },
+  {
+    "name": "Drama Code",
+    "description": "Reconociendo a los desarrolladores que convierten cada situación en una obra de teatro y hacen del código una emocionante aventura.\nSu habilidad para convertir errores en momentos épicos es insuperable.\n¡Celebremos su capacidad para mantenernos entretenidos en el mundo del desarrollo de software! ¡Viva el drama de código!"
+  }
+]

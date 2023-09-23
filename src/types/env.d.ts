@@ -8,6 +8,8 @@ declare global {
       APP_BASE_URL?: string;
       CLIENT_URL?: string;
       SESSION_SECRET?: string;
+      DISCORD_CLIENT_ID?: string;
+      DISCORD_CLIENT_SECRET?: string;
       GITHUB_CLIENT_ID?: string;
       GITHUB_CLIENT_SECRET?: string;
       DATABASE_URL?: string;

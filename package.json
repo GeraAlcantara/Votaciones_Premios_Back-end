@@ -12,7 +12,8 @@
     "format": "prettier --check ./src",
     "format:fix": "prettier --check --write ./src",
     "commitlint": "commitlint --color --edit",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "migrations": "ts-node src/modules/database/migrations.ts"
   },
   "commitlint": {
     "extends": [
@@ -39,6 +40,7 @@
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
     "passport-discord": "^0.1.4",
+    "passport-github2": "^0.1.12",
     "winston": "^3.10.0"
   },
   "devDependencies": {
@@ -55,7 +57,8 @@
     "@types/node": "^20.4.5",
     "@types/passport": "^1.0.12",
     "@types/passport-discord": "^0.1.7",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@types/passport-github2": "^1.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
