@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compresion());
-app.use(cors({origin: "http://localhost:3000", credentials: true}));
+app.use(cors({ origin: config.clientUrl, credentials: true }));
 app.use(
   session({
     secret: config.sessionSecret,
