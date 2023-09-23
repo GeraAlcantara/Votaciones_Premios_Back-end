@@ -1,15 +1,5 @@
-import mongoose, { Document, Schema, Model, Types } from 'mongoose';
-
-export type Account = {
-  provider: string;
-  providerAccountId: string;
-  username: string | null;
-  user: string;
-};
-
-export interface AccountDocument extends Account, Document {}
-
-type AccountModel = Model<AccountDocument>;
+import mongoose, { Schema, Model, Types } from 'mongoose';
+import { AccountDocument } from '@app/modules/users/user.types';
 
 const AccountSchema: Schema = new Schema(
   {
@@ -31,7 +21,7 @@ const AccountSchema: Schema = new Schema(
   },
 );
 
-export const AccountModel = mongoose.model<AccountDocument, AccountModel>(
-  'Account',
-  AccountSchema,
-);
+export const AccountModel = mongoose.model<
+  AccountDocument,
+  Model<AccountDocument>
+>('Account', AccountSchema);
